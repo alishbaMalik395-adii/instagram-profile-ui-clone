@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram - Home Feed (Screen 2)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Specific Styles for Home Feed Screen */
+        
+        /* 1. Top Navbar Modification for Home Feed */
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            border-bottom: 1px solid #efefef;
+        }
+        .feed-header .logo {
+            font-family: 'Style Script', cursive, sans-serif;
+            font-size: 22px;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .feed-header i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* 2. Horizontal Stories Section (Flexbox) */
+        .stories-bar {
+            display: flex;
+            padding: 10px 0 10px 16px;
+            gap: 12px;
+            overflow-x: auto; /* Horizontal scroll enable karne ke liye */
+            border-bottom: 1px solid #efefef;
+            scrollbar-width: none;
+        }
+        .stories-bar::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for clean look */
+        }
+        .story-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0; /* Items squeeze na hon */
+        }
+        .story-ring {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            padding: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .story-ring.my-story::after {
+            content: '+';
+            position: absolute;
+            bottom: 0; right: 0;
+            background: #0095f6; color: white;
+            width: 16px; height: 16px;
+            border-radius: 50%; font-size: 12px;
+            display: flex; justify-content: center; align-items: center;
+            border: 2px solid white;
+        }
+        .story-pic {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+        .story-username {
+            font-size: 11px;
+            color: #262626;
+            margin-top: 4px;
+            width: 58px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        /* 3. Main Post Card Layout */
+        .post-card {
+            background: white;
+            margin-bottom: 15px;
+        }
+        .post-user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+        }
+        .post-user-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-avatar {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .post-username {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        /* Gradient Post Image like your screenshot */
+        .post-image-area {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); /* Pink/Gradient box like screenshot */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .post-image-area.purple {
+            background: linear-gradient(135deg, #65799b 0%, #5e2563 100%);
+        }
+
+        /* Post Action Icons (Flexbox) */
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 14px;
+        }
+        .post-actions-left {
+            display: flex;
+            gap: 16px;
+        }
+        .post-actions i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .fa-heart.active { color: #ed4956; }
+
+        /* Captions and Comments text */
+        .post-details {
+            padding: 0 14px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .likes-count { font-weight: 600; margin-bottom: 5px; }
+        .caption { margin-bottom: 5px; }
+        .caption span { font-weight: 600; margin-right: 5px; }
+        .view-comments { color: #8e8e8e; cursor: pointer; margin-bottom: 5px; }
+
+        /* 4. Fixed Bottom Tab Bar Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 12px 0;
+            border-top: 1px solid #efefef;
+            z-index: 999;
+        }
+        .bottom-nav a {
+            color: #262626;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        .bottom-nav .profile-icon-nav {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            border: 1px solid #262626;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-container" style="padding-bottom: 60px; position: relative;">
+        
+        <header class="feed-header">
+            <i class="fab fa-instagram"></i>
+            <span class="logo">Instagram</span>
+            <div class="header-right-icons" style="display:flex; gap:18px;">
+                <i class="far fa-heart"></i>
+                <i class="fab fa-telegram-plane"></i>
+            </div>
+        </header>
+
+        <section class="stories-bar">
+            <div class="story-container">
+                <div class="story-ring my-story">
+                    <img src="C:\Users\Marhaba\Pictures\Saved Pictures\images (15).jpg" class="story-pic">
+                </div>
+                <span class="story-username">Your Story</span>
+            </div>
+            <div class="story-container">
+                <div class="story-ring">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="story-pic">
+                </div>
+                <span class="story-username">saima_i</span>
+            </div>
+            <div class="story-container">
+                <div class="story-ring">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100" class="story-pic">
+                </div>
+                <span class="story-username">taskeen_k</span>
+            </div>
+            <div class="story-container">
+                <div class="story-ring">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100" class="story-pic">
+                </div>
+                <span class="story-username">sir_shahzaib</span>
+            </div>
+            <div class="story-container">
+                <div class="story-ring">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" class="story-pic">
+                </div>
+                <span class="story-username">code_alpha</span>
+            </div>
+        </section>
+
+        <main class="feed-posts">
+            
+            <article class="post-card">
+                <div class="post-user-info">
+                    <div class="post-user-left">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="user-avatar">
+                        <span class="post-username">saima_imtiyaz</span>
+                    </div>
+                    <i class="fas fa-ellipsis-h" style="color: #8e8e8e; font-size:14px;"></i>
+                </div>
+                
+                <div class="post-image-area"></div>
+
+                <div class="post-actions">
+                    <div class="post-actions-left">
+                        <i class="fas fa-heart active"></i>
+                        <i class="far fa-comment"></i>
+                        <i class="far fa-paper-plane"></i>
+                    </div>
+                    <i class="far fa-bookmark"></i>
+                </div>
+
+                <div class="post-details">
+                    <p class="likes-count">1,240 likes</p>
+                    <p class="caption"><span>saima_imtiyaz</span> Working on HTML & CSS layouts! #coding 💻</p>
+                    <p class="view-comments">View all 14 comments</p>
+                </div>
+            </article>
+
+            <article class="post-card">
+                <div class="post-user-info">
+                    <div class="post-user-left">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100" class="user-avatar">
+                        <span class="post-username">taskeen_kaleem</span>
+                    </div>
+                    <i class="fas fa-ellipsis-h" style="color: #8e8e8e; font-size:14px;"></i>
+                </div>
+                
+                <div class="post-image-area purple"></div>
+
+                <div class="post-actions">
+                    <div class="post-actions-left">
+                        <i class="far fa-heart"></i>
+                        <i class="far fa-comment"></i>
+                        <i class="far fa-paper-plane"></i>
+                    </div>
+                    <i class="far fa-bookmark"></i>
+                </div>
+
+                <div class="post-details">
+                    <p class="likes-count">854 likes</p>
+                    <p class="caption"><span>taskeen_kaleem</span> Aesthetics and UI designs ✨</p>
+                    <p class="view-comments">View all 9 comments</p>
+                </div>
+            </article>
+
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="screen2.html" style="color: #000;"><i class="fas fa-home"></i></a>
+            <a href="#"><i class="fas fa-search"></i></a>
+            <a href="#"><i class="far fa-plus-square"></i></a>
+            <a href="#"><i class="far fa-heart"></i></a>
+            <a href="index.html">
+                <img src="C:\Users\Marhaba\Pictures\Saved Pictures\images (15).jpg" alt="Profile" class="profile-icon-nav">
+            </a>
+        </nav>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Profile - Professional Look</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Yahan specific attractive extra styles add kar rahe hain */
+        .bio-link { color: #00376b; text-decoration: none; font-weight: 500; }
+        
+        /* Highlight Stories Section */
+        .highlights-container {
+            display: flex;
+            padding: 10px 16px;
+            gap: 15px;
+            overflow-x: auto; /* Scroll horizontally */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+        .highlights-container::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
+
+        .highlight-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 70px;
+            flex-shrink: 0;
+        }
+        
+        .highlight-ring {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(#ffffff, #ffffff) padding-box,
+                        linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) border-box;
+            border: 2px solid transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2px;
+            cursor: pointer;
+        }
+        
+        .highlight-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .highlight-text {
+            font-size: 11px;
+            color: #262626;
+            margin-top: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 64px;
+        }
+
+        /* Post Interactions Overlay (Real Grid look) */
+        .post-item {
+            position: relative;
+            cursor: pointer;
+        }
+        .post-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            gap: 15px;
+        }
+        .post-item:hover .post-overlay {
+            opacity: 1;
+        }
+        .overlay-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-container">
+        
+        <header class="top-bar">
+            <i class="fas fa-arrow-left"></i>
+            <div class="username-container" style="display:flex; align-items:center; gap:5px;">
+                <h2 class="username">alishba_malik</h2>
+                <i class="fas fa-certificate" style="color:#0095f6; font-size:12px;"></i>
+            </div>
+            <i class="fas fa-ellipsis-v"></i>
+        </header>
+
+        <section class="profile-info">
+            <div class="profile-pic-container">
+                <img src="C:\Users\Marhaba\Pictures\Saved Pictures\images (15).jpg" alt="Profile" class="profile-pic">
+            </div>
+            <div class="profile-stats">
+                <div class="stat-item"><span class="stat-count">18</span><span class="stat-label">Posts</span></div>
+                <div class="stat-item"><span class="stat-count">1.5k</span><span class="stat-label">Followers</span></div>
+                <div class="stat-item"><span class="stat-count">350</span><span class="stat-label">Following</span></div>
+            </div>
+        </section>
+
+        <section class="profile-bio">
+            <h3 class="full-name">Alishba Malik</h3>
+            <p class="bio-category" style="color:#8e8e8e; font-size:14px; margin-bottom:3px;">Digital Creator</p>
+            <p class="bio-text">
+                💻 Full Stack Developer | Learning ReactJS & Node.js<br>
+                🚀 Building Edufleet Project<br>
+                📩 DM for Collabs<br>
+                <a href="#" class="bio-link">github.com/alishbamalik</a>
+            </p>
+            <p class="followed-by" style="font-size:12px; color:#8e8e8e; margin-top:8px;">Followed by username, user2 + 10 others</p>
+        </section>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary">Following</button>
+            <button class="btn">Message</button>
+            <button class="btn icon-btn"><i class="fas fa-user-plus"></i></button>
+        </div>
+
+        <section class="highlights-container">
+            <div class="highlight-item">
+                <div class="highlight-ring">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=100" class="highlight-pic">
+                </div>
+                <span class="highlight-text">💻 Projects</span>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-ring">
+                    <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=100" class="highlight-pic">
+                </div>
+                <span class="highlight-text">⚙️ Setup</span>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-ring">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=100" class="highlight-pic">
+                </div>
+                <span class="highlight-text">📚 Learning</span>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-ring">
+                    <img src="https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?w=100" class="highlight-pic">
+                </div>
+                <span class="highlight-text">☕ Vibe</span>
+            </div>
+        </section>
+
+        <nav class="profile-tabs" style="margin-top:10px;">
+            <a href="index.html" class="tab active"><i class="fas fa-th"></i></a>
+            <a href="screen2.html" class="tab"><i class="fas fa-tv"></i></a>
+            <a href="screen3.html" class="tab"><i class="fas fa-id-badge"></i></a>
+        </nav>
+
+        <main class="posts-gallery">
+            <div class="post-item">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300">
+                <div class="post-overlay">
+                    <span class="overlay-item"><i class="fas fa-heart"></i> 112</span>
+                    <span class="overlay-item"><i class="fas fa-comment"></i> 14</span>
+                </div>
+            </div>
+            <div class="post-item">
+                <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=300">
+                <div class="post-overlay">
+                    <span class="overlay-item"><i class="fas fa-heart"></i> 95</span>
+                    <span class="overlay-item"><i class="fas fa-comment"></i> 8</span>
+                </div>
+            </div>
+            <div class="post-item"><img src="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=300"></div>
+            <div class="post-item"><img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=300"></div>
+            <div class="post-item"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300"></div>
+            <div class="post-item"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=300"></div>
+        </main>
+         <nav class="bottom-nav">
+            <a href="screen2.html" style="color: #000;"><i class="fas fa-home"></i></a>
+            <a href="#"><i class="fas fa-search"></i></a>
+            <a href="#"><i class="far fa-plus-square"></i></a>
+            <a href="#"><i class="far fa-heart"></i></a>
+            <a href="index.html">
+                <img src="C:\Users\Marhaba\Pictures\Saved Pictures\images (15).jpg" alt="Profile" class="profile-icon-nav">
+            </a>
+        </nav>
+    </div>
+
+</body>
+</html>
