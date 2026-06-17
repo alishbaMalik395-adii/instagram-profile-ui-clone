@@ -3,197 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Profile - Professional Look</title>
+    <title>Instagram 3 Screens Side-by-Side - Online Images</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    
     <style>
-        /* Yahan specific attractive extra styles add kar rahe hain */
-        .bio-link { color: #00376b; text-decoration: none; font-weight: 500; }
-        
-        /* Highlight Stories Section */
-        .highlights-container {
-            display: flex;
-            padding: 10px 16px;
-            gap: 15px;
-            overflow-x: auto; /* Scroll horizontally */
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Hide scrollbar Firefox */
+        /* --- GLOBAL WRAPPER FOR PARALLEL LAYOUT --- */
+        body {
+            background-color: #fafafa;
+            margin: 0;
+            padding: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-        .highlights-container::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
 
-        .highlight-item {
+        .presentation-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 15px;
+            flex-wrap: nowrap;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* --- COMPACT PARALLEL SIZE --- */
+        .mobile-screen {
+            width: 310px;
+            height: 640px;
+            background: white;
+            border: 10px solid #262626;
+            border-radius: 28px;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.12);
+            overflow-y: auto;
+            position: relative;
+            scrollbar-width: none;
+        }
+        .mobile-screen::-webkit-scrollbar { display: none; }
+
+        .screen-label {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: #262626;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .screen-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            width: 70px;
-            flex-shrink: 0;
-        }
-        
-        .highlight-ring {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: linear-gradient(#ffffff, #ffffff) padding-box,
-                        linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) border-box;
-            border: 2px solid transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2px;
-            cursor: pointer;
-        }
-        
-        .highlight-pic {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
         }
 
-        .highlight-text {
-            font-size: 11px;
-            color: #262626;
-            margin-top: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 64px;
-        }
+        /* --- UI ELEMENTS STYLING --- */
+        .bio-link { color: #00376b; text-decoration: none; font-weight: 500; }
+        .highlights-container { display: flex; padding: 8px 12px; gap: 10px; overflow-x: auto; scrollbar-width: none; }
+        .highlight-item { display: flex; flex-direction: column; align-items: center; text-align: center; width: 52px; flex-shrink: 0; }
+        .highlight-ring { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(#ffffff, #ffffff) padding-box, linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) border-box; border: 2px solid transparent; display: flex; justify-content: center; align-items: center; padding: 2px; }
+        .highlight-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        .highlight-text { font-size: 9px; color: #262626; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 46px; }
 
-        /* Post Interactions Overlay (Real Grid look) */
-        .post-item {
-            position: relative;
-            cursor: pointer;
-        }
-        .post-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-            gap: 15px;
-        }
-        .post-item:hover .post-overlay {
-            opacity: 1;
-        }
-        .overlay-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+        /* Home Feed Styles */
+        .feed-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid #efefef; position: sticky; top:0; background:white; z-index:10; }
+        .feed-header .logo { font-size: 16px; font-weight: bold; font-style: italic; }
+        .stories-bar { display: flex; padding: 8px 12px; gap: 10px; overflow-x: auto; border-bottom: 1px solid #efefef; scrollbar-width: none; }
+        .story-container { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+        .story-ring { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); padding: 2px; display: flex; justify-content: center; align-items: center; }
+        .story-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid white; }
+        .story-username { font-size: 9px; color: #262626; margin-top: 3px; text-align: center; }
+        .post-card { background: white; margin-bottom: 12px; }
+        .post-user-info { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; }
+        .post-user-left { display: flex; align-items: center; gap: 8px; }
+        .user-avatar { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+        .post-username { font-size: 11px; font-weight: 600; }
+        .post-image-area { width: 100%; height: 220px; background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); }
+        .post-image-area.purple { background: linear-gradient(135deg, #65799b 0%, #5e2563 100%); }
+        .post-actions { display: flex; justify-content: space-between; padding: 8px 12px; }
+        .post-actions-left { display: flex; gap: 12px; }
+        .post-actions i { font-size: 16px; }
+        .post-details { padding: 0 12px; font-size: 11px; }
+        .likes-count { font-weight: 600; margin-bottom: 2px; }
+
+        /* Explore Grid Styles */
+        .explore-header { display: flex; align-items: center; padding: 8px 12px; gap: 10px; border-bottom: 1px solid #efefef; background: white; position: sticky; top:0; z-index:10; }
+        .search-box-container { display: flex; align-items: center; background: #efefef; padding: 5px 10px; border-radius: 8px; flex: 1; gap: 6px; }
+        .search-placeholder { color: #8e8e8e; font-size: 12px; }
+        .explore-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 95px; gap: 3px; padding: 3px 0; }
+        .explore-item { position: relative; overflow: hidden; background-size: cover; background-position: center; }
+        .explore-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255, 117, 140, 0.3) 0%, rgba(255, 126, 179, 0.3) 100%); z-index: 1; }
+        .icon-badge { position: absolute; top: 6px; right: 6px; color: white; font-size: 11px; text-shadow: 0 0 3px rgba(0,0,0,0.5); z-index: 2; }
+        
+        .box-1 { background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300'); }
+        .box-2 { grid-column: 2 / span 2; grid-row: 1 / span 2; background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500'); }
+        .box-2::before { background: linear-gradient(135deg, rgba(240, 148, 51, 0.2) 0%, rgba(220, 39, 67, 0.3) 100%); }
+        .box-3 { grid-column: 1; grid-row: 2; background-image: url('https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=300'); }
+        .box-4 { background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300'); }
+        .box-5 { background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=300'); }
+        .box-6 { background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300'); }
+
+        /* Sticky Bottom Navigation Styles */
+        .bottom-nav-fixed { position: absolute; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; align-items: center; padding: 8px 0; border-top: 1px solid #efefef; z-index: 100; }
+        .bottom-nav-fixed i { color: #262626; font-size: 16px; }
+        .bottom-nav-fixed img { width: 20px; height: 20px; border-radius: 50%; border: 1px solid #262626; object-fit: cover; }
     </style>
 </head>
 <body>
 
-    <div class="mobile-container">
+    <div class="presentation-container">
         
-        <header class="top-bar">
-            <i class="fas fa-arrow-left"></i>
-            <div class="username-container" style="display:flex; align-items:center; gap:5px;">
-                <h2 class="username">alishba_malik</h2>
-                <i class="fas fa-certificate" style="color:#0095f6; font-size:12px;"></i>
-            </div>
-            <i class="fas fa-ellipsis-v"></i>
-        </header>
+        <div class="screen-wrapper">
+            <div class="screen-label">Screen 1: Profile View</div>
+            <div class="mobile-screen" style="padding-bottom: 40px;">
+                <header class="top-bar" style="padding: 8px 12px; display:flex; justify-content:space-between; align-items:center;">
+                    <i class="fas fa-arrow-left" style="font-size:14px;"></i>
+                    <h2 class="username" style="font-size:14px; margin:0;">alishba_malik</h2>
+                    <i class="fas fa-ellipsis-v" style="font-size:14px;"></i>
+                </header>
 
-        <section class="profile-info">
-            <div class="profile-pic-container">
-                <img src="C:\Users\Marhaba\Pictures\Saved Pictures\images (15).jpg" alt="Profile" class="profile-pic">
-            </div>
-            <div class="profile-stats">
-                <div class="stat-item"><span class="stat-count">18</span><span class="stat-label">Posts</span></div>
-                <div class="stat-item"><span class="stat-count">1.5k</span><span class="stat-label">Followers</span></div>
-                <div class="stat-item"><span class="stat-count">350</span><span class="stat-label">Following</span></div>
-            </div>
-        </section>
+                <section class="profile-info" style="display:flex; padding:8px 12px; align-items:center; gap:15px;">
+                    <div style="width:65px; height:65px; border-radius:50%; border: 1px solid #dbdbdb; overflow:hidden; display:flex; justify-content:center; align-items:center; flex-shrink:0;">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="Profile" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="profile-stats" style="display:flex; gap:12px; flex:1; justify-content:space-around; font-size:11px; text-align:center;">
+                        <div><strong>18</strong><br><span style="color:#8e8e8e;">Posts</span></div>
+                        <div><strong>1.5k</strong><br><span style="color:#8e8e8e;">Followers</span></div>
+                        <div><strong>350</strong><br><span style="color:#8e8e8e;">Following</span></div>
+                    </div>
+                </section>
 
-        <section class="profile-bio">
-            <h3 class="full-name">Alishba Malik</h3>
-            <p class="bio-category" style="color:#8e8e8e; font-size:14px; margin-bottom:3px;">Digital Creator</p>
-            <p class="bio-text">
-                💻 Full Stack Developer | Learning ReactJS & Node.js<br>
-                🚀 Building Edufleet Project<br>
-                📩 DM for Collabs<br>
-                <a href="#" class="bio-link">github.com/alishbamalik</a>
-            </p>
-            <p class="followed-by" style="font-size:12px; color:#8e8e8e; margin-top:8px;">Followed by username, user2 + 10 others</p>
-        </section>
+                <section class="profile-bio" style="padding:0 12px; font-size:11px;">
+                    <strong class="full-name">Alishba Malik</strong>
+                    <p style="margin:2px 0; color:#8e8e8e;">Digital Creator</p>
+                    <p style="margin:0; line-height:1.4;">💻 Full Stack Developer | ReactJS<br>🚀 Building Edufleet Project<br><a href="#" class="bio-link">github.com/alishbamalik</a></p>
+                </section>
 
-        <div class="action-buttons">
-            <button class="btn btn-primary">Following</button>
-            <button class="btn">Message</button>
-            <button class="btn icon-btn"><i class="fas fa-user-plus"></i></button>
+                <div class="action-buttons" style="display:flex; padding:8px 12px; gap:6px;">
+                    <button class="btn btn-primary" style="flex:1; padding:5px; font-size:11px; font-weight:600; background:#efefef; border:none; border-radius:50px;">Following</button>
+                    <button class="btn" style="flex:1; padding:5px; font-size:11px; font-weight:600; background:#efefef; border:none; border-radius:50px;">Message</button>
+                </div>
+
+                <style>
+                    .hl-local-pic { width:100%; height:100%; border-radius:50%; object-fit:cover; }
+                </style>
+                <section class="highlights-container">
+                    <div class="highlight-item"><div class="highlight-ring"><img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=100" class="hl-local-pic"></div><span class="highlight-text">💻 Projects</span></div>
+                    <div class="highlight-item"><div class="highlight-ring"><img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=100" class="hl-local-pic"></div><span class="highlight-text">⚙️ Setup</span></div>
+                    <div class="highlight-item"><div class="highlight-ring"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100" class="hl-local-pic"></div><span class="highlight-text">📚 Learning</span></div>
+                </section>
+
+                <nav class="profile-tabs" style="display:flex; justify-content:space-around; border-top:1px solid #efefef; margin-top:8px; padding:8px 0;">
+                    <div class="tab active" style="border-bottom:2px solid black; padding-bottom:3px; font-size:14px;"><i class="fas fa-th"></i></div>
+                    <div class="tab" style="color:#8e8e8e; font-size:14px;"><i class="fas fa-tv"></i></div>
+                    <div class="tab" style="color:#8e8e8e; font-size:14px;"><i class="fas fa-id-badge"></i></div>
+                </nav>
+
+                <main class="posts-gallery" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:3px;">
+                    <div class="post-item" style="height:95px;"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200" style="width:100%; height:100%; object-fit:cover;"></div>
+                    <div class="post-item" style="height:95px;"><img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=200" style="width:100%; height:100%; object-fit:cover;"></div>
+                    <div class="post-item" style="height:95px;"><img src="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=200" style="width:100%; height:100%; object-fit:cover;"></div>
+                    <div class="post-item" style="height:95px;"><img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=200" style="width:100%; height:100%; object-fit:cover;"></div>
+                    <div class="post-item" style="height:95px;"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200" style="width:100%; height:100%; object-fit:cover;"></div>
+                    <div class="post-item" style="height:95px;"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=200" style="width:100%; height:100%; object-fit:cover;"></div>
+                </main>
+
+                <nav class="bottom-nav-fixed">
+                    <i class="fas fa-home"></i><i class="fas fa-search"></i><i class="far fa-plus-square"></i><i class="far fa-heart"></i>
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50" style="width:20px; height:20px; border-radius:50%; object-fit:cover;">
+                </nav>
+            </div>
         </div>
 
-        <section class="highlights-container">
-            <div class="highlight-item">
-                <div class="highlight-ring">
-                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=100" class="highlight-pic">
-                </div>
-                <span class="highlight-text">💻 Projects</span>
-            </div>
-            <div class="highlight-item">
-                <div class="highlight-ring">
-                    <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=100" class="highlight-pic">
-                </div>
-                <span class="highlight-text">⚙️ Setup</span>
-            </div>
-            <div class="highlight-item">
-                <div class="highlight-ring">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=100" class="highlight-pic">
-                </div>
-                <span class="highlight-text">📚 Learning</span>
-            </div>
-            <div class="highlight-item">
-                <div class="highlight-ring">
-                    <img src="https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?w=100" class="highlight-pic">
-                </div>
-                <span class="highlight-text">☕ Vibe</span>
-            </div>
-        </section>
+        <div class="screen-wrapper">
+            <div class="screen-label">Screen 2: Home Feed View</div>
+            <div class="mobile-screen" style="padding-bottom: 40px;">
+                <header class="feed-header">
+                    <i class="fab fa-instagram" style="font-size:16px;"></i>
+                    <span class="logo">Instagram</span>
+                    <div style="display:flex; gap:12px;"><i class="far fa-heart" style="font-size:14px;"></i><i class="fab fa-telegram-plane" style="font-size:14px;"></i></div>
+                </header>
 
-        <nav class="profile-tabs" style="margin-top:10px;">
-            <a href="index.html" class="tab active"><i class="fas fa-th"></i></a>
-            <a href="screen2.html" class="tab"><i class="fas fa-tv"></i></a>
-            <a href="screen3.html" class="tab"><i class="fas fa-id-badge"></i></a>
-        </nav>
+                <section class="stories-bar">
+                    <div class="story-container"><div class="story-ring"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" class="story-pic"></div><span class="story-username">Your Story</span></div>
+                    <div class="story-container"><div class="story-ring"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="story-pic"></div><span class="story-username">saima_i</span></div>
+                    <div class="story-container"><div class="story-ring"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100" class="story-pic"></div><span class="story-username">taskeen_k</span></div>
+                </section>
 
-        <main class="posts-gallery">
-            <div class="post-item">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300">
-                <div class="post-overlay">
-                    <span class="overlay-item"><i class="fas fa-heart"></i> 112</span>
-                    <span class="overlay-item"><i class="fas fa-comment"></i> 14</span>
-                </div>
+                <main class="feed-posts">
+                    <article class="post-card">
+                        <div class="post-user-info">
+                            <div class="post-user-left">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="user-avatar">
+                                <span class="post-username">saima_imtiyaz</span>
+                            </div>
+                            <i class="fas fa-ellipsis-h" style="color:#8e8e8e; font-size:10px;"></i>
+                        </div>
+                        <div class="post-image-area" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400'); background-size: cover; background-position: center;"></div>
+                        <div class="post-actions">
+                            <div class="post-actions-left"><i class="fas fa-heart" style="color:#ed4956;"></i><i class="far fa-comment"></i><i class="far fa-paper-plane"></i></div>
+                            <i class="far fa-bookmark"></i>
+                        </div>
+                        <div class="post-details">
+                            <p class="likes-count">1,240 likes</p>
+                            <p><strong>saima_imtiyaz</strong> UI layouts styling! 💻</p>
+                        </div>
+                    </article>
+                </main>
+
+                <nav class="bottom-nav-fixed">
+                    <i class="fas fa-home" style="color:black;"></i><i class="fas fa-search"></i><i class="far fa-plus-square"></i><i class="far fa-heart"></i>
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50" style="width:20px; height:20px; border-radius:50%; object-fit:cover;">
+                </nav>
             </div>
-            <div class="post-item">
-                <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=300">
-                <div class="post-overlay">
-                    <span class="overlay-item"><i class="fas fa-heart"></i> 95</span>
-                    <span class="overlay-item"><i class="fas fa-comment"></i> 8</span>
-                </div>
+        </div>
+
+        <div class="screen-wrapper">
+            <div class="screen-label">Screen 3: Explore Grid View</div>
+            <div class="mobile-screen" style="padding-bottom: 40px;">
+                <header class="explore-header">
+                    <div class="search-box-container"><i class="fas fa-search" style="font-size:12px;"></i><span class="search-placeholder">Search</span></div>
+                    <i class="fas fa-qrcode" style="font-size:14px;"></i>
+                </header>
+
+                <main class="explore-grid">
+                    <div class="explore-item box-1"></div>
+                    <div class="explore-item box-2"><i class="fas fa-video icon-badge"></i></div>
+                    <div class="explore-item box-3"><i class="far fa-clone icon-badge"></i></div>
+                    <div class="explore-item box-4"></div>
+                    <div class="explore-item box-5"></div>
+                    <div class="explore-item box-6"></div>
+                </main>
+
+                <nav class="bottom-nav-fixed">
+                    <i class="fas fa-home"></i><i class="fas fa-search" style="color:black;"></i><i class="far fa-plus-square"></i><i class="far fa-heart"></i>
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50" style="width:20px; height:20px; border-radius:50%; object-fit:cover;">
+                </nav>
             </div>
-            <div class="post-item"><img src="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=300"></div>
-            <div class="post-item"><img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=300"></div>
-            <div class="post-item"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300"></div>
-            <div class="post-item"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=300"></div>
-        </main>
-         <nav class="bottom-nav">
-            <a href="screen2.html" style="color: #000;"><i class="fas fa-home"></i></a>
-            <a href="#"><i class="fas fa-search"></i></a>
-            <a href="#"><i class="far fa-plus-square"></i></a>
-            <a href="#"><i class="far fa-heart"></i></a>
-            <a href="index.html">
-                <img src="C:\Users\Marhaba\Pictures\Saved Pictures\images (15).jpg" alt="Profile" class="profile-icon-nav">
-            </a>
-        </nav>
+        </div>
+
     </div>
 
 </body>
